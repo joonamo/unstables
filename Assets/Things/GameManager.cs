@@ -161,6 +161,7 @@ public class GameManager : MonoBehaviour
     public void ReportScore(int amount) {
         score += amount;
         RenderScore();
+        human.RefreshStamina();
         
         if (phase < GamePhase.flyingHorse && score >= scoreLimits[(int) phase]) {
             phase++;
@@ -239,6 +240,8 @@ public class GameManager : MonoBehaviour
                         SpawnCollectible();
                     }
                 }
+
+                helpfulText.text = "Stamina: " + Mathf.Round(human.stamina) + "%";
                 break;
             }
             case (GameState.death): {

@@ -17,7 +17,7 @@ public class Grabber : MonoBehaviour
         human = GetComponentInParent<Human>();
     }
 
-    void Ungrab() {
+    public void Ungrab() {
         joint.enabled = false;
         grabbed = false;
     }
@@ -31,8 +31,10 @@ public class Grabber : MonoBehaviour
     void Update()
     {
         bool tryingToGrab =
-            Input.GetButtonDown(button) ||
-            (!other.grabbed && Input.GetButton(button));
+            human.stamina > 0.0f && (
+                Input.GetButtonDown(button) ||
+                (!other.grabbed && Input.GetButton(button))
+            );
 
         if (tryingToGrab) {
             var anchor = getAnchorPoint();

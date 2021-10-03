@@ -871,6 +871,9 @@ MonoBehaviour:
   steerAmount: 100
   launchForce: 50
   anyGrab: 0
+  stamina: 100
+  staminaLose: 1
+  staminaPerCollectible: 10
 --- !u!1 &3423513240840549487
 GameObject:
   m_ObjectHideFlags: 0

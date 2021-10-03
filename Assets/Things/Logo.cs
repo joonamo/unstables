@@ -8,6 +8,6 @@ public class Logo : MonoBehaviour
     void Update()
     {
         var phase = Mathf.Sin(Time.unscaledTime) * 0.5f + 0.5f;
-        transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Lerp(-7.0f, 7.0f, phase));
+        transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Lerp(-4.0f, 4.0f, phase));
     }
 }

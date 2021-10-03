@@ -13,6 +13,10 @@ public class Human : MonoBehaviour
     public bool anyGrab = false;
     bool prevGrab = false;
 
+    public float stamina = 100.0f;
+    public float staminaLose = 1.0f;
+    public float staminaPerCollectible = 10.0f;
+
     Grabber[] grabbers;
 
     // Start is called before the first frame update
@@ -31,6 +35,10 @@ public class Human : MonoBehaviour
                  }
             }
         }
+    }
+
+    public void RefreshStamina() {
+        stamina += staminaPerCollectible;
     }
 
     // Update is called once per frame
@@ -58,6 +66,12 @@ public class Human : MonoBehaviour
         }
 
         if (anyGrab) {
+            stamina -= Time.deltaTime * staminaLose;
+            if (stamina <= 0.0f) {
+                foreach (var grabber in grabbers) {
+                    grabber.Ungrab();
+                }
+            }
             torso.AddForce(steerVec * steerAmount, ForceMode2D.Force);
         } else if (prevGrab) {
             torso.AddForce(steerVec.normalized * launchForce, ForceMode2D.Impulse);
