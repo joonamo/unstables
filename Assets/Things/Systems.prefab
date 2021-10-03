@@ -235,17 +235,23 @@ MonoBehaviour:
   minBounds:
   - {x: -2, y: -1}
   - {x: -3, y: -1.5}
-  - {x: -6, y: -2}
-  - {x: -7.5, y: -3}
+  - {x: -6, y: -3}
+  - {x: -6, y: -4}
   maxBounds:
   - {x: 2, y: 1}
-  - {x: 4, y: 2}
+  - {x: 3, y: 1.5}
   - {x: 6, y: 2}
-  - {x: 7.5, y: 4}
-  minBoundsHorse: []
-  maxBoundsHorse: []
+  - {x: 6, y: 4}
+  minBoundsHorse:
+  - {x: -6, y: -1.5}
+  - {x: 0.5, y: -1.5}
+  - {x: -7, y: 1}
+  maxBoundsHorse:
+  - {x: -0.5, y: 0}
+  - {x: 6, y: 0}
+  - {x: 7, y: 4}
   debugBounds: 1
-  debugBoundsHorse: 0
+  debugBoundsHorse: 1
   scoreLimits: 000000000100000002000000
 --- !u!114 &3124649261396994894
 MonoBehaviour:

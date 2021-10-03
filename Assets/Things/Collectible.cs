@@ -51,7 +51,7 @@ public class Collectible : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
+    void OnTriggerEnter2D(Collider2D other) {
         if (active && other.gameObject.tag == "Human") {
             GameManager.GetGameManager().ReportScore(score);
             active = false;
