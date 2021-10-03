@@ -7,7 +7,8 @@ public enum GameState
     nameEntry,
     menu,
     game,
-    death
+    death,
+    deathMenu
 }
 
 public enum GamePhase
@@ -27,6 +28,10 @@ public class GameManager : MonoBehaviour
     public TMPro.TextMeshPro helpfulText;
     public TMPro.TextMeshPro scoreText;
     public TMPro.TextMeshPro highScoreText;
+    public GameObject endSplash;
+    public GameObject startSplash;
+    public GameObject logo;
+    public GameObject scoreLogo;
     int score = 0;
     public Canvas nameEntryCanvas;
     public TMPro.TMP_InputField nameField;
@@ -44,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     public GameState state = GameState.menu;
     public GamePhase phase = GamePhase.tutorial;
+    float timeOfDeath = 0.0f;
 
     public List<Vector2> minBounds;
     public List<Vector2> maxBounds;
@@ -85,6 +91,11 @@ public class GameManager : MonoBehaviour
 
         var collectible = SpawnCollectible();
         collectible.expireTime = float.PositiveInfinity;
+
+        endSplash.SetActive(false);
+        startSplash.SetActive(false);
+        logo.SetActive(false);
+        scoreLogo.SetActive(true);
     }
 
     Horse SpawnHorse (Vector3 where) {
@@ -124,15 +135,27 @@ public class GameManager : MonoBehaviour
 
     public void ReportDeath() {
         if (state == GameState.game) {
+            timeOfDeath = Time.unscaledTime;
             state = GameState.death;
-            helpfulText.text = "Game Over!";
-            highScoreText.enabled = true;
+            helpfulText.text = "";
             if (score > 0) {
                 scoreService.ReportScore(score);
             } else {
                 scoreService.RefreshScores();
             }
         }
+    }
+
+    public void ShowDeathMenu() {
+        highScoreText.enabled = true;
+        state = GameState.deathMenu;
+
+        JustDestroy<Human>();
+        JustDestroy<Horse>();
+        JustDestroy<Collectible>();
+
+        horses.Clear();
+        endSplash.SetActive(true);
     }
 
     public void ReportScore(int amount) {
@@ -154,7 +177,7 @@ public class GameManager : MonoBehaviour
         highScoreText.text = "High Scores\n";
         int i = 1;
         foreach (var score in scoreService.scores.scores) {
-            highScoreText.text += $"{i}: {score.player} {score.score}\n";
+            highScoreText.text += $"{i} {score.player} {score.score}\n";
             i++;
             if (i > 10) {
                 break;
@@ -223,7 +246,13 @@ public class GameManager : MonoBehaviour
                     Time.timeScale = Mathf.Clamp01(Time.timeScale - Time.unscaledDeltaTime);
                 }
 
-                if (Input.GetButtonDown("ok")) {
+                if (Input.GetButtonDown("ok") || Input.GetButtonDown("Submit") || Time.unscaledTime - timeOfDeath > 3.0) {
+                    ShowDeathMenu();
+                }
+                break;
+            }
+            case (GameState.deathMenu): {
+                if (Input.GetButtonDown("ok") || Input.GetButtonDown("Submit")) {
                     ResetGame();
                 }
                 break;

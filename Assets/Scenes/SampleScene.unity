@@ -558,13 +558,45 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 3177757355827497219, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
+      propertyPath: m_fontSize
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177757355827497219, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177757356180720426, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
+      propertyPath: m_fontSize
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177757356180720426, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177757357477954597, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177757357477954598, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
+      propertyPath: m_GlobalPointSize
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177757357477954599, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 366.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177757357477954599, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 117.97
+      objectReference: {fileID: 0}
     - target: {fileID: 3177757357477954599, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -250
+      value: -416.62
       objectReference: {fileID: 0}
     - target: {fileID: 3177757357477954599, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 32
+      value: -127.98
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
@@ -664,6 +696,10 @@ PrefabInstance:
       propertyPath: nameEntryCanvas
       value: 
       objectReference: {fileID: 479339717}
+    - target: {fileID: 1820363266676586621, guid: 98d72e3b8c48446138d1856e880c14eb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3583672869468389337, guid: 98d72e3b8c48446138d1856e880c14eb, type: 3}
       propertyPath: m_Name
       value: Systems
