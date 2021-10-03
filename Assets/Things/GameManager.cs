@@ -118,7 +118,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
         helpfulText.text = "";
         scoreText.text = "";
-        highScoreText.enabled = false;
+        highScoreText.text = "High Scores\nLoading...";
+        // highScoreText.enabled = false;
     }
 
     public void ReportDeath() {

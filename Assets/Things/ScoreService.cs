@@ -30,9 +30,12 @@ public class ScorePost {
 
 public class ScoreService : MonoBehaviour
 {
+    // local
     string baseUrl = "http://localhost:3000";
     string gameId = "d33491cd-ecbd-4405-8b0a-dc89baab0893";
     string secret = "secret";
+
+    // prod
 
     public string playerName = "Player";
     public ScoreList scores = new ScoreList();
