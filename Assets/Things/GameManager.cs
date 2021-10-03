@@ -176,9 +176,15 @@ public class GameManager : MonoBehaviour
 
     public void ReportHighScoresAvailable() {
         highScoreText.text = "High Scores\n";
+        var maxScore = 0;
+        if (scoreService.scores.scores.Length > 0) {
+            maxScore = scoreService.scores.scores[0].score;
+        }
         int i = 1;
         foreach (var score in scoreService.scores.scores) {
-            highScoreText.text += $"{i} {score.player} {score.score}\n";
+            var showScore = score.score.ToString("D4");
+            var showI = i == 10 ? "10" : "  " + i; 
+            highScoreText.text += $"{showI}: {showScore} {score.player}\n";
             i++;
             if (i > 10) {
                 break;

@@ -558,46 +558,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 3177757355827497219, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_fontSize
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757355827497219, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757356180720426, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_fontSize
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757356180720426, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757357477954597, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757357477954598, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_GlobalPointSize
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757357477954599, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 366.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757357477954599, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 117.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757357477954599, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -416.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177757357477954599, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -127.98
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c9646cbb935b4c28a2459731f798291, type: 3}
 --- !u!1001 &3241393325458599524

@@ -38,7 +38,7 @@ public class Human : MonoBehaviour
     }
 
     public void RefreshStamina() {
-        stamina += staminaPerCollectible;
+        stamina = Mathf.Clamp(stamina + staminaPerCollectible, 0.0f, 100.0f);
     }
 
     // Update is called once per frame
