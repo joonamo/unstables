@@ -872,7 +872,7 @@ MonoBehaviour:
   launchForce: 50
   anyGrab: 0
   stamina: 100
-  staminaLose: 1.5
+  staminaLose: 3
   staminaPerCollectible: 10
 --- !u!1 &3423513240840549487
 GameObject:

@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void ReportHighScoresAvailable() {
-        highScoreText.text = "High Scores\n";
+        highScoreText.text = "";
         var maxScore = 0;
         if (scoreService.scores.scores.Length > 0) {
             maxScore = scoreService.scores.scores[0].score;
