@@ -25,13 +25,14 @@ public class GameManager : MonoBehaviour
         return GameObject.FindObjectOfType<GameManager>();
     }
 
-    public TMPro.TextMeshPro helpfulText;
     public TMPro.TextMeshPro scoreText;
     public TMPro.TextMeshPro highScoreText;
     public GameObject endSplash;
     public GameObject startSplash;
     public GameObject logo;
     public GameObject scoreLogo;
+    public GameObject tutorial;
+    public GameObject tooltip;
     int score = 0;
     public Canvas nameEntryCanvas;
     public TMPro.TMP_InputField nameField;
@@ -77,7 +78,6 @@ public class GameManager : MonoBehaviour
         phase = GamePhase.tutorial;
         nextCollectibleDelay = 0.0f;
 
-        helpfulText.text = "Press Z to hold to your horses!";
         highScoreText.enabled = false;
         RenderScore();
 
@@ -101,6 +101,8 @@ public class GameManager : MonoBehaviour
         startSplash.SetActive(false);
         logo.SetActive(false);
         scoreLogo.SetActive(true);
+        tooltip.SetActive(true);
+        tutorial.SetActive(true);
     }
 
     Horse SpawnHorse (Vector3 where) {
@@ -118,10 +120,11 @@ public class GameManager : MonoBehaviour
 
     void StartGame() {
         state = GameState.game;
-        helpfulText.text = "";
 
         musicOut.volume = 0.0f;
         musicOut.Play();
+
+        tutorial.SetActive(false);
     }
 
     void RenderScore() {
@@ -135,23 +138,25 @@ public class GameManager : MonoBehaviour
         nameField.ActivateInputField();
         nameField.onSubmit.AddListener(ReportName);
         Time.timeScale = 0.0f;
-        helpfulText.text = "";
         scoreText.text = "";
         highScoreText.text = "High Scores\nLoading...";
         // highScoreText.enabled = false;
+
+        tooltip.SetActive(false);
+        tutorial.SetActive(false);
     }
 
     public void ReportDeath() {
         if (state == GameState.game) {
             timeOfDeath = Time.unscaledTime;
             state = GameState.death;
-            helpfulText.text = "";
             if (score > 0) {
                 scoreService.ReportScore(score);
             } else {
                 scoreService.RefreshScores();
             }
 
+            tooltip.SetActive(false);
             audioOut.clip = winSound;
             audioOut.Play();
         }
@@ -267,7 +272,6 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
-                helpfulText.text = "Stamina: " + Mathf.Round(human.stamina) + "%";
                 break;
             }
             case (GameState.death): {
