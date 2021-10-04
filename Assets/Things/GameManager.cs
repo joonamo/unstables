@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public GameObject scoreLogo;
     public GameObject tutorial;
     public GameObject tooltip;
+    public GameObject staminaBar;
     int score = 0;
     public Canvas nameEntryCanvas;
     public TMPro.TMP_InputField nameField;
@@ -103,6 +104,8 @@ public class GameManager : MonoBehaviour
         scoreLogo.SetActive(true);
         tooltip.SetActive(true);
         tutorial.SetActive(true);
+        staminaBar.SetActive(true);
+        staminaBar.transform.localScale = Vector3.one;
     }
 
     Horse SpawnHorse (Vector3 where) {
@@ -144,6 +147,7 @@ public class GameManager : MonoBehaviour
 
         tooltip.SetActive(false);
         tutorial.SetActive(false);
+        staminaBar.SetActive(false);
     }
 
     public void ReportDeath() {
@@ -157,6 +161,7 @@ public class GameManager : MonoBehaviour
             }
 
             tooltip.SetActive(false);
+            staminaBar.SetActive(false);
             audioOut.clip = winSound;
             audioOut.Play();
         }
@@ -271,6 +276,7 @@ public class GameManager : MonoBehaviour
                         SpawnCollectible();
                     }
                 }
+                staminaBar.transform.localScale = new Vector3(1.0f, human.stamina / 100.0f, 1.0f);
 
                 break;
             }
