@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Undstables Leaderboar</title>
+  <meta name="description" content="Undstables Leaderboar">
+  <meta name="author" content="Team Airfryer">
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scoreRow {
+      display: flex;
+      flex-direction: row;
+      font-weight: 100;
+      font-size: 2em;
+      margin: 2px;
+    }
+
+    .altRow {
+      background-color: rgb(245, 240, 240);
+    }
+
+    .index {
+      display: flex;
+      flex: 0.4;
+    }
+
+    .scoreNumber {
+      display: flex;
+      flex: 1;
+      font-weight: 500;
+    }
+
+    .player {
+      display: flex;
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 5em;
+    }
+  </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="container">
+    <img src="logo-online.png" />
+    <h1>Leaderboards</h1>
+    <div id="scores">
+      <p>Loading...</p>
+    </div>
+  </div>
+  <script>
+    fetch("https://highscore.joonamo.com/game/52bbb29e-f8c0-4f7d-95cb-c41e2816fb33/scores?perPlayer=true&count=100")
+      .then(res => res.json())
+      .then(res => {
+        let target = document.getElementById("scores");
+        target.innerHTML = "";
+        let i = 1;
+        res.forEach(s => {
+          let container = document.createElement("div")
+          container.className = "scoreRow"
+          if (i % 2) {
+            container.className += " altRow"
+          }
+          let n = document.createElement("div");
+          n.className = "index"
+          container.appendChild(n)
+          n.innerHTML = i
+          let se = document.createElement("div");
+          se.className = "scoreNumber"
+          let scoreString = "" + s.score;
+          se.innerHTML = scoreString.padStart(5, "0")
+          container.appendChild(se)
+          let p = document.createElement("div");
+          p.className = "player"
+          p.innerHTML = s.player
+          container.appendChild(p)
+          target.appendChild(container)
+
+          ++i
+        });
+      })
+  </script>
+</body>
+
+</html>
