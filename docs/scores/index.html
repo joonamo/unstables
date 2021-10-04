@@ -18,10 +18,12 @@
 
       font-family: 'Roboto', sans-serif;
       color: #333;
+      margin: 0
     }
     .container {
       display: flex;
       flex-direction: column;
+      max-width: 100%;
     }
 
     .scoreRow {
@@ -29,7 +31,7 @@
       flex-direction: row;
       font-weight: 100;
       font-size: 2em;
-      margin: 2px;
+      padding: 4px;
     }
 
     .altRow {
@@ -54,6 +56,18 @@
 
     h1 {
       font-size: 5em;
+      display: flex;
+      align-self: center;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      .scoreRow {
+        font-size: 1.5em;
+      }
     }
   </style>
 
