@@ -19,15 +19,19 @@ public class BackgroundScroller : MonoBehaviour
 
         var target = piece1.transform.position;
 
-        piece1.transform.position = new Vector3(
-            Mathf.Lerp(-extent, extent, phase),
-            target.y,
-            target.z
-        );
-        piece2.transform.position = new Vector3(
-            Mathf.Lerp(-extent, extent, phase2),
-            target.y,
-            target.z
-        );
+        if (piece1) {
+            piece1.transform.position = new Vector3(
+                Mathf.Lerp(-extent, extent, phase),
+                target.y,
+                target.z
+            );
+        }
+        if (piece2) {
+            piece2.transform.position = new Vector3(
+                Mathf.Lerp(-extent, extent, phase2),
+                target.y,
+                target.z
+            );
+        }
     }
 }

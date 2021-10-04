@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     public GameObject tutorial;
     public GameObject tooltip;
     public GameObject staminaBar;
+    public SpriteRenderer staminaRender;
+    public Color maxStaminaColor;
+    public Color minStaminaColor;
     int score = 0;
     public Canvas nameEntryCanvas;
     public TMPro.TMP_InputField nameField;
@@ -106,10 +109,11 @@ public class GameManager : MonoBehaviour
         tutorial.SetActive(true);
         staminaBar.SetActive(true);
         staminaBar.transform.localScale = Vector3.one;
+        staminaRender.color = maxStaminaColor;
     }
 
     Horse SpawnHorse (Vector3 where) {
-        var horseGo = Instantiate(WhatAreHorses[0], where, Quaternion.identity);
+        var horseGo = Instantiate(WhatAreHorses[horses.Count], where, Quaternion.identity);
         Horse horse;
         horseGo.TryGetComponent<Horse>(out horse);
         horses.Add(horse);
@@ -276,7 +280,10 @@ public class GameManager : MonoBehaviour
                         SpawnCollectible();
                     }
                 }
-                staminaBar.transform.localScale = new Vector3(1.0f, human.stamina / 100.0f, 1.0f);
+
+                var staminaPhase = human.stamina / 100.0f;
+                staminaBar.transform.localScale = new Vector3(1.0f, staminaPhase, 1.0f);
+                staminaRender.color = Vector4.Lerp(minStaminaColor, maxStaminaColor, staminaPhase);
 
                 break;
             }

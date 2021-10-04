@@ -11,6 +11,7 @@ public class Horse : MonoBehaviour
     public Rigidbody2D rb;
 
     public List<SpringJoint2D> springs = new List<SpringJoint2D>();
+    public List<SpringJoint2D> wings = new List<SpringJoint2D>();
 
     public Vector2 minBounds;
     public Vector2 maxBounds;
@@ -54,10 +55,11 @@ public class Horse : MonoBehaviour
 
         rb.MoveRotation(Mathf.Lerp(oscillateMin, oscillateMax, phase));
 
-        var footPhase = phase;
         foreach (var spring in springs) {
             spring.distance = phase * 0.6f;
-            footPhase = (phase + 0.1f) % 1.0f;
+        }
+        foreach (var wing in wings) {
+            wing.distance = (1.0f - phase) * 2.0f;
         }
 
         if (gm.phase > GamePhase.oneHorse) {
