@@ -12,6 +12,11 @@ public class Horse : MonoBehaviour
 
     public List<SpringJoint2D> springs = new List<SpringJoint2D>();
     public List<SpringJoint2D> wings = new List<SpringJoint2D>();
+    
+    public GameObject shadow;
+    Vector3 shadowOffset;
+    public bool absoluteShadow = false;
+    public float absoluteShadowY = 0.0f;
 
     public Vector2 minBounds;
     public Vector2 maxBounds;
@@ -37,6 +42,8 @@ public class Horse : MonoBehaviour
         gm = GameManager.GetGameManager();
 
         ChooseTarget();
+
+        shadowOffset = shadow.transform.position - rb.transform.position;
     }
 
     public void ChooseTarget() {
@@ -52,7 +59,6 @@ public class Horse : MonoBehaviour
     void Update()
     {
         var phase = (Mathf.Sin((Time.time + oscillateOffset) * oscillateSpeed) + 1.0f) * 0.5f;
-
         rb.MoveRotation(Mathf.Lerp(oscillateMin, oscillateMax, phase));
 
         foreach (var spring in springs) {
@@ -69,6 +75,16 @@ public class Horse : MonoBehaviour
             } else {
                 moveVec = Vector3.Lerp(moveVec, toTarget.normalized * moveSpeed, acceleration * Time.deltaTime);
                 rb.MovePosition(rb.position + moveVec * Time.deltaTime);
+            }
+        }
+
+        if (shadow) {
+            if (absoluteShadow) {
+                var pos = rb.transform.position + shadowOffset;
+                pos.y = absoluteShadowY;
+                shadow.transform.position = pos;
+            } else {
+                shadow.transform.position = rb.transform.position + shadowOffset;
             }
         }
     }
