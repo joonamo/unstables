@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
+        // Application.targetFrameRate = 60;
         nameField.ActivateInputField();
         nameField.onSubmit.AddListener(ReportName);
         Time.timeScale = 0.0f;
