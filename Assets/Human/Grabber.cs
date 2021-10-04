@@ -10,11 +10,13 @@ public class Grabber : MonoBehaviour
     public bool grabbed = false;
     Human human;
     public Grabber other;
+    GameManager gm;
 
     // Start is called before the first frame update
     void Start()
     {
         human = GetComponentInParent<Human>();
+        gm = GameManager.GetGameManager();
     }
 
     public void Ungrab() {
@@ -36,7 +38,7 @@ public class Grabber : MonoBehaviour
                 (!other.grabbed && Input.GetButton(button))
             );
 
-        if (tryingToGrab) {
+        if (!grabbed && tryingToGrab) {
             var anchor = getAnchorPoint();
             foreach (var part in human.horseParts) {
                 var closestPoint = part.ClosestPoint(anchor);
@@ -45,6 +47,12 @@ public class Grabber : MonoBehaviour
                     grabbed = true;
                     joint.enabled = true;
                     joint.connectedBody = part;
+
+                    var horse = part.GetComponentInParent<Horse>();
+                    if (!horse.grabSound.isPlaying && (Time.timeScale < 0.1 || Random.Range(0.0f, 1.0f) < 0.3)) {
+                        horse.grabSound.pitch = Random.Range(0.90f, 1.1f);
+                        horse.grabSound.Play();
+                    }
                     break;
                 }
             }

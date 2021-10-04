@@ -60,6 +60,11 @@ public class GameManager : MonoBehaviour
     
     public List<int> scoreLimits;
 
+    public AudioSource audioOut;
+    public AudioSource musicOut;
+    public AudioClip collectSound;
+    public AudioClip winSound;
+
     void JustDestroy<T>() where T : MonoBehaviour {
         foreach (var Target in GameObject.FindObjectsOfType<T>()) {
             GameObject.Destroy(Target.gameObject);
@@ -114,6 +119,9 @@ public class GameManager : MonoBehaviour
     void StartGame() {
         state = GameState.game;
         helpfulText.text = "";
+
+        musicOut.volume = 0.0f;
+        musicOut.Play();
     }
 
     void RenderScore() {
@@ -143,6 +151,9 @@ public class GameManager : MonoBehaviour
             } else {
                 scoreService.RefreshScores();
             }
+
+            audioOut.clip = winSound;
+            audioOut.Play();
         }
     }
 
@@ -155,6 +166,8 @@ public class GameManager : MonoBehaviour
         JustDestroy<Collectible>();
 
         horses.Clear();
+        musicOut.Stop();
+
         endSplash.SetActive(true);
     }
 
@@ -172,6 +185,11 @@ public class GameManager : MonoBehaviour
             }
         }
         nextCollectibleDelay = 0.0f;
+
+        if (!audioOut.isPlaying) {
+            audioOut.clip = collectSound;
+            audioOut.Play();
+        }
     }
 
     public void ReportHighScoresAvailable() {
@@ -238,7 +256,9 @@ public class GameManager : MonoBehaviour
             }
             case (GameState.game): {
                 if (Time.timeScale < 1.0f) {
-                    Time.timeScale = Mathf.Clamp01(Time.timeScale + Time.unscaledDeltaTime);
+                    var phase = Mathf.Clamp01(Time.timeScale + Time.unscaledDeltaTime);
+                    Time.timeScale = phase;
+                    musicOut.volume = phase;
                 }
                 if (phase > GamePhase.tutorial) {
                     nextCollectibleDelay -= Time.deltaTime;
@@ -252,7 +272,9 @@ public class GameManager : MonoBehaviour
             }
             case (GameState.death): {
                 if (Time.timeScale > 0.00f) {
-                    Time.timeScale = Mathf.Clamp01(Time.timeScale - Time.unscaledDeltaTime);
+                    var phase = Mathf.Clamp01(Time.timeScale - Time.unscaledDeltaTime);
+                    musicOut.volume = phase;
+                    Time.timeScale = phase;
                 }
 
                 if (Input.GetButtonDown("ok") || Input.GetButtonDown("Submit") || Time.unscaledTime - timeOfDeath > 3.0) {

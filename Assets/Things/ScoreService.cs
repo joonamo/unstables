@@ -71,7 +71,7 @@ public class ScoreService : MonoBehaviour
 
     IEnumerator GetScores()
     {
-        UnityWebRequest req = UnityWebRequest.Get(baseUrl + "/game/" + gameId + "/scores");
+        UnityWebRequest req = UnityWebRequest.Get(baseUrl + "/game/" + gameId + "/scores?perPlayer=true");
         yield return req.SendWebRequest();
 
         if (req.result != UnityWebRequest.Result.Success)
@@ -103,6 +103,11 @@ public class ScoreService : MonoBehaviour
         UnityWebRequest req = UnityWebRequest.Post(baseUrl + "/game/" + gameId + "/score", form);
 
         yield return req.SendWebRequest();
+
+        if (req.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(req.error);
+        }
 
         RefreshScores();
     }

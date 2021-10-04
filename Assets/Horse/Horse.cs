@@ -25,6 +25,8 @@ public class Horse : MonoBehaviour
 
     GameManager gm;
 
+    public AudioSource grabSound;
+
     // Start is called before the first frame update
     void Start()
     {
