@@ -108,15 +108,15 @@
           let n = document.createElement("div");
           n.className = "index"
           container.appendChild(n)
-          n.innerHTML = i
+          n.appendChild(document.createTextNode(i))
           let se = document.createElement("div");
           se.className = "scoreNumber"
           let scoreString = "" + s.score;
-          se.innerHTML = scoreString.padStart(5, "0")
+          se.appendChild(document.createTextNode(scoreString.padStart(5, "0")))
           container.appendChild(se)
           let p = document.createElement("div");
           p.className = "player"
-          p.innerHTML = s.player
+          p.appendChild(document.createTextNode(s.player))
           container.appendChild(p)
           target.appendChild(container)
 
